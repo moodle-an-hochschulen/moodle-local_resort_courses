@@ -15,3 +15,17 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 $string['pluginname'] = 'Resort Courses';
+$string['skipcategories'] = 'Skip categories';
+$string['skipcategoriesdescription'] = 'Skip these categories when resorting';
+$string['skipcategoriesrecursively'] = 'Skip categories recursively';
+$string['skipcategoriesrecursivelydescription'] = 'Skip these categories and all of their children';
+$string['sortcourseidasc'] = 'Sort by course ID number, ascending order';
+$string['sortcourseiddesc'] = 'Sort by course ID number, descending order';
+$string['sortfullnameasc'] = 'Sort by course full name, ascending order';
+$string['sortfullnamedesc'] = 'Sort by course full name, descending order';
+$string['sortorder'] = 'Sort order';
+$string['sortorderdescription'] = 'How should the courses be sorted?';
+$string['sortshortnameasc'] = 'Sort by course short name, ascending order';
+$string['sortshortnamedesc'] = 'Sort by course short name, descending order';
+$string['sortstartdateasc'] = 'Sort by course start date, ascending order';
+$string['sortstartdatedesc'] = 'Sort by course start date, descending order';

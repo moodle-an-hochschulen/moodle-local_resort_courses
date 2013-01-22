@@ -15,3 +15,17 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 $string['pluginname'] = 'Kurse sortieren';
+$string['skipcategories'] = 'Kategorien ignorieren';
+$string['skipcategoriesdescription'] = 'Kurse in diesen Kategorien sollen nicht automatisch sortiert werden';
+$string['skipcategoriesrecursively'] = 'Kategorien rekursiv ignorieren';
+$string['skipcategoriesrecursivelydescription'] = 'Kurse in diesen Kategorien und aller ihrer Kinder sollen nicht automatisch sortiert werden';
+$string['sortcourseidasc'] = 'Nach der Kurs-ID aufsteigend sortieren';
+$string['sortcourseiddesc'] = 'Nach der Kurs-ID absteigend sortieren';
+$string['sortfullnameasc'] = 'Nach dem vollen Kursnamen aufsteigend sortieren';
+$string['sortfullnamedesc'] = 'Nach dem vollen Kursnamen absteigend sortieren';
+$string['sortorder'] = 'Sortierreihenfolge';
+$string['sortorderdescription'] = 'In welcher Reihenfolge sollen die Kurse sortiert werden?';
+$string['sortshortnameasc'] = 'Nach dem kurzen Kursnamen aufsteigend sortieren';
+$string['sortshortnamedesc'] = 'Nach dem vollen Kursnamen absteigend sortieren';
+$string['sortstartdateasc'] = 'Nach dem Kurs-Startdatum aufsteigend sortieren';
+$string['sortstartdatedesc'] = 'Nach dem Kurs-Startdatum absteigend sortieren';

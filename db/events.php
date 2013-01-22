@@ -16,13 +16,13 @@
 
 $handlers = array(
 	'course_created' => array (
-		'handlerfile'	   => '/local/resort_courses/resort_courses.php',
+		'handlerfile'	   => '/local/resort_courses/lib.php',
 		'handlerfunction'  => 'resort_courses',
 		'schedule'		   => 'instant',
 		'internal'		   => 1
 	),
 	'course_updated' => array (
-		'handlerfile'	   => '/local/resort_courses/resort_courses.php',
+		'handlerfile'	   => '/local/resort_courses/lib.php',
 		'handlerfunction'  => 'resort_courses',
 		'schedule'		   => 'instant',
 		'internal'		   => 1
