@@ -35,7 +35,7 @@ if ($hassiteconfig) {
 	$sortorders[SORT_COURSEID_DESC] = get_string('sortcourseiddesc', 'local_resort_courses');
 	$sortorders[SORT_STARTDATE_ASC] = get_string('sortstartdateasc', 'local_resort_courses');
 	$sortorders[SORT_STARTDATE_DESC] = get_string('sortstartdatedesc', 'local_resort_courses');
-	$page->add(new admin_setting_configselect('local_resort_courses/sortorder', get_string('sortorder', 'local_resort_courses'), get_string('sortorderdescription', 'local_resort_courses'), SORT_FULLNAME_ASC, $sortorders));
+	$page->add(new admin_setting_configselect('local_resort_courses/sortorder', get_string('sortorder', 'local_resort_courses'), get_string('sortorder_desc', 'local_resort_courses'), SORT_FULLNAME_ASC, $sortorders));
 
 
 	// Skip categories
@@ -44,10 +44,10 @@ if ($hassiteconfig) {
 	// Create skip categories widget
 	require_once($CFG->dirroot.'/course/lib.php');
 	$categories = make_categories_options();
-	$page->add(new admin_setting_configmultiselect('local_resort_courses/skipcategories', get_string('skipcategories', 'local_resort_courses'), get_string('skipcategoriesdescription', 'local_resort_courses'), null, $categories));
+	$page->add(new admin_setting_configmultiselect('local_resort_courses/skipcategories', get_string('skipcategories', 'local_resort_courses'), get_string('skipcategories_desc', 'local_resort_courses'), null, $categories));
 
 	// Create skip categories recursively widget
-	$page->add(new admin_setting_configcheckbox('local_resort_courses/skipcategoriesrecursively', get_string('skipcategoriesrecursively', 'local_resort_courses'), get_string('skipcategoriesrecursivelydescription', 'local_resort_courses'), 0));
+	$page->add(new admin_setting_configcheckbox('local_resort_courses/skipcategoriesrecursively', get_string('skipcategoriesrecursively', 'local_resort_courses'), get_string('skipcategoriesrecursively_desc', 'local_resort_courses'), 0));
 
 
 	// Add settings page to navigation tree

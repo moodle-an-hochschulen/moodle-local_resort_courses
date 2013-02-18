@@ -5,11 +5,12 @@ Moodle plugin which sorts a category page automatically as soon as a course has 
 
 Requirements
 ============
-This plugin requires Moodle 2.3+
+This plugin requires Moodle 2.4+
 
 
 Changes
 =======
+2013-02-18 - Check compatibility for Moodle 2.4, fix language string names to comply with language string name convention
 2013-01-21 - Migrate plugin settings from config.php to a settings page within Moodle
 2012-06-25 - Update version.php for Moodle 2.3
 2012-06-01 - Initial version
@@ -20,7 +21,7 @@ Installation
 Install the plugin like any other plugin to folder
 /local/resort_courses
 
-See http://docs.moodle.org/23/en/Installing_plugins for details on installing Moodle plugins
+See http://docs.moodle.org/24/en/Installing_plugins for details on installing Moodle plugins
 
 
 Usage & Settings
@@ -51,6 +52,13 @@ Further information
 local_resort_courses is found in the Moodle Plugins repository: http://moodle.org/plugins/view.php?plugin=local_resort_courses
 
 Report a bug or suggest an improvement: https://github.com/abias/moodle-local_resort_courses/issues
+
+
+Moodle release support
+======================
+Due to limited ressources, local_resort_courses is only maintained for the most recent major release of Moodle. However, previous versions of this plugin which work in legacy major releases of Moodle are still available as-is without any further updates in the Moodle Plugins repository.
+
+There may be several weeks after a new major release of Moodle has been published until I can do a compatibility check and fix problems if necessary. If you encounter problems with a new major release of Moodle - or can confirm that local_resort_courses still works with a new major relase - please let me know on https://github.com/abias/moodle-local_resort_courses/issues
 
 
 Copyright
