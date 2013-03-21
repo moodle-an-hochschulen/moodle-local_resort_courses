@@ -14,9 +14,11 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-$string['pluginname'] = 'Resort Courses';
+defined('MOODLE_INTERNAL') || die();
+
+$string['pluginname'] = 'Re-sort Courses';
 $string['skipcategories'] = 'Skip categories';
-$string['skipcategories_desc'] = 'Skip these categories when resorting';
+$string['skipcategories_desc'] = 'Skip these categories when re-sorting';
 $string['skipcategoriesrecursively'] = 'Skip categories recursively';
 $string['skipcategoriesrecursively_desc'] = 'Skip these categories and all of their children';
 $string['sortcourseidasc'] = 'Sort by course ID number, ascending order';
