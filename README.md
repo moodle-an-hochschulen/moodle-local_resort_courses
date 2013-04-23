@@ -10,6 +10,7 @@ This plugin requires Moodle 2.4+
 
 Changes
 =======
+2013-04-23 - Check if we need to specify log events
 2013-03-18 - Code cleanup according to moodle codechecker
 2013-02-18 - Check compatibility for Moodle 2.4, fix language string names to comply with language string name convention
 2013-01-21 - Migrate plugin settings from config.php to a settings page within Moodle

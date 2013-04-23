@@ -119,7 +119,7 @@ function resort_courses($eventdata) {
 
 
     // Log the event
-    add_to_log (SITEID, 'local_resort_courses', '', '', $category->name.' ('.$category->id.')');
+    add_to_log (SITEID, 'local_resort_courses', '', '', $category->name.' ('.$category->id.')'); // TODO: Specify log events in db/log.php, see http://docs.moodle.org/dev/Logging_API#Mod.2F.2A.2Fdb.2Flog.php_Files
 
     return true;
 }
