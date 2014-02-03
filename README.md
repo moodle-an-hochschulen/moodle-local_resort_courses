@@ -5,11 +5,12 @@ Moodle plugin which sorts a category page automatically as soon as a course has 
 
 Requirements
 ============
-This plugin requires Moodle 2.5+
+This plugin requires Moodle 2.6+
 
 
 Changes
 =======
+2014-01-31 - Check compatibility for Moodle 2.6, no functionality change
 2013-07-30 - Transfer Github repository from github.com/abias/... to github.com/moodleuulm/...; Please update your Git paths if necessary
 2013-07-30 - Check compatibility for Moodle 2.5, no functionality change
 2013-04-23 - Check if we need to specify log events
@@ -25,7 +26,7 @@ Installation
 Install the plugin like any other plugin to folder
 /local/resort_courses
 
-See http://docs.moodle.org/25/en/Installing_plugins for details on installing Moodle plugins
+See http://docs.moodle.org/26/en/Installing_plugins for details on installing Moodle plugins
 
 
 Usage & Settings
