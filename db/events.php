@@ -14,19 +14,26 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
+/**
+ * Local plugin "resort courses" - Event definition
+ *
+ * @package     local
+ * @subpackage  local_resort_courses
+ * @copyright   2013 Alexander Bias, University of Ulm <alexander.bias@uni-ulm.de>
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+
 defined('MOODLE_INTERNAL') || die();
 
-$handlers = array(
-    'course_created' => array (
-        'handlerfile'      => '/local/resort_courses/lib.php',
-        'handlerfunction'  => 'resort_courses',
-        'schedule'         => 'instant',
-        'internal'         => 1
+$observers = array(
+    array(
+        'eventname'   => '\core\event\course_created',
+        'includefile' => '/local/resort_courses/locallib.php',
+        'callback'    => 'resort_courses',
     ),
-    'course_updated' => array (
-        'handlerfile'      => '/local/resort_courses/lib.php',
-        'handlerfunction'  => 'resort_courses',
-        'schedule'         => 'instant',
-        'internal'         => 1
-    )
+    array(
+        'eventname'   => '\core\event\course_updated',
+        'includefile' => '/local/resort_courses/locallib.php',
+        'callback'    => 'resort_courses',
+    ),
 );

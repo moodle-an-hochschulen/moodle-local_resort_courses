@@ -48,8 +48,14 @@ function resort_courses($eventdata) {
     $config = get_config('local_resort_courses');
 
 
+    // Get course (because we need its categor)
+    $eventcourse = get_course($eventdata->objectid);
+    if (!$eventcourse) {
+        return true; // Now we have an error, but if we return false, the event will stay in the event queue -> let's return and leave the category unsorted
+    }
+
     // Get category
-    $category = $DB->get_record('course_categories', array('id' => $eventdata->category));
+    $category = $DB->get_record('course_categories', array('id' => $eventcourse->category));
     if (!$category) {
         return true; // Now we have an error, but if we return false, the event will stay in the event queue -> let's return and leave the category unsorted
     }
@@ -90,16 +96,16 @@ function resort_courses($eventdata) {
             $sortsql = "lower(c.shortname) DESC";
             break;
         case RESORT_COURSES_SORT_COURSEID_ASC:
-            $sortsql = "lower(c.idnumber) ASC";
+            $sortsql = "c.idnumber ASC";
             break;
         case RESORT_COURSES_SORT_COURSEID_DESC:
-            $sortsql = "lower(c.idnumber) DESC";
+            $sortsql = "c.idnumber DESC";
             break;
         case RESORT_COURSES_SORT_STARTDATE_ASC:
-            $sortsql = "lower(c.startdate) ASC";
+            $sortsql = "c.startdate ASC";
             break;
         case RESORT_COURSES_SORT_STARTDATE_DESC:
-            $sortsql = "lower(c.startdate) DESC";
+            $sortsql = "c.startdate DESC";
             break;
         default:
             $sortsql = "lower(c.fullname) ASC";
@@ -117,9 +123,12 @@ function resort_courses($eventdata) {
         fix_course_sortorder(); // should not be needed
     }
 
-
     // Log the event
-    add_to_log (SITEID, 'local_resort_courses', '', '', $category->name.' ('.$category->id.')'); // TODO: Specify log events in db/log.php, see http://docs.moodle.org/dev/Logging_API#Mod.2F.2A.2Fdb.2Flog.php_Files
+    $logevent = \local_resort_courses\event\courses_sorted::create(array(
+        'objectid' => $category->id,
+        'context' => context_coursecat::instance($category->id)
+    ));
+    $logevent->trigger();
 
     return true;
 }

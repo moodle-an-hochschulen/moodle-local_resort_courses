@@ -17,6 +17,8 @@
 defined('MOODLE_INTERNAL') || die();
 
 $string['pluginname'] = 'Re-sort Courses';
+$string['eventcoursessorted'] = 'Courses re-sorted';
+$string['eventcoursessorted_desc'] = 'Courses in category \'{$a}\' were automatically re-sorted after the creation of a course in this category';
 $string['skipcategories'] = 'Skip categories';
 $string['skipcategories_desc'] = 'Skip these categories when re-sorting';
 $string['skipcategoriesrecursively'] = 'Skip categories recursively';
