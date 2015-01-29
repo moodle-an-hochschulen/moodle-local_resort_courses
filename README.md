@@ -60,7 +60,7 @@ The local_resort_courses plugin acts behind the scenes, therefore it works with 
 
 Further information
 -------------------
-local_resort_courses is found in the Moodle Plugins repository: http://moodle.org/plugins/view.php?plugin=local_resort_courses
+local_resort_courses is found in the Moodle Plugins repository: http://moodle.org/plugins/view/local_resort_courses
 
 Report a bug or suggest an improvement: https://github.com/moodleuulm/moodle-local_resort_courses/issues
 
