@@ -7,12 +7,13 @@ Moodle plugin which sorts a category page automatically as soon as a course has 
 Requirements
 ------------
 
-This plugin requires Moodle 2.8+
+This plugin requires Moodle 2.9+
 
 
 Changes
 -------
 
+* 2015-08-18 - Check compatibility for Moodle 2.9, no functionality change
 * 2015-01-29 - Check compatibility for Moodle 2.8, no functionality change
 * 2014-08-29 - Update README file
 * 2014-08-25 - Support new event API, remove legacy event handling
