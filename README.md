@@ -13,6 +13,7 @@ This plugin requires Moodle 2.9+
 Changes
 -------
 
+* 2015-08-21 - Avoid PHP warnings caused by accessing undefined property - Credits to Jarosław Maciejewski
 * 2015-08-18 - Check compatibility for Moodle 2.9, no functionality change
 * 2015-01-29 - Check compatibility for Moodle 2.8, no functionality change
 * 2014-08-29 - Update README file

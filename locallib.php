@@ -61,10 +61,12 @@ function resort_courses($eventdata) {
     }
 
     // Check if category has to be skipped according to plugin settings
-    $skipcategories = explode(',', $config->skipcategories);
-    if (is_array($skipcategories)) {
-        if (in_array($category->id, $skipcategories)) {
-            return true; // Category has to be skipped -> let's return and leave the category unsorted
+    if (!empty($config->skipcategories)) {
+        $skipcategories = explode(',', $config->skipcategories);
+        if (is_array($skipcategories)) {
+            if (in_array($category->id, $skipcategories)) {
+                return true; // Category has to be skipped -> let's return and leave the category unsorted
+            }
         }
     }
 
