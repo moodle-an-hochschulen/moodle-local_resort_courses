@@ -17,10 +17,9 @@
 /**
  * Local plugin "resort courses" - Event definition
  *
- * @package     local
- * @subpackage  local_resort_courses
- * @copyright   2013 Alexander Bias, University of Ulm <alexander.bias@uni-ulm.de>
- * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package    local_resort_courses
+ * @copyright  2013 Alexander Bias, University of Ulm <alexander.bias@uni-ulm.de>
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 namespace local_resort_courses\event;
@@ -30,10 +29,9 @@ defined('MOODLE_INTERNAL') || die();
 /**
  * The local_resort_courses courses sorted event class.
  *
- * @package     local
- * @subpackage  local_resort_courses
- * @copyright   2013 Alexander Bias, University of Ulm <alexander.bias@uni-ulm.de>
- * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package    local_resort_courses
+ * @copyright  2013 Alexander Bias, University of Ulm <alexander.bias@uni-ulm.de>
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class courses_sorted extends \core\event\base {
 
