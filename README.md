@@ -7,12 +7,13 @@ Moodle plugin which sorts a category page automatically as soon as a course has 
 Requirements
 ------------
 
-This plugin requires Moodle 3.0+
+This plugin requires Moodle 3.1+
 
 
 Changes
 -------
 
+* 2016-07-19 - Check compatibility for Moodle 3.1, no functionality change
 * 2016-02-10 - Change plugin version and release scheme to the scheme promoted by moodle.org, no functionality change
 * 2016-01-01 - Check compatibility for Moodle 3.0, no functionality change
 * 2015-08-21 - Avoid PHP warnings caused by accessing undefined property - Credits to Jarosław Maciejewski
