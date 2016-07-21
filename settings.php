@@ -59,5 +59,5 @@ if ($hassiteconfig) {
 
 
     // Add settings page to navigation tree
-    $ADMIN->add('localplugins', $page);
+    $ADMIN->add('courses', $page);
 }
