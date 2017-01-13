@@ -23,7 +23,7 @@ Usage & Settings
 ----------------
 
 The local_resort_courses plugin acts completely behind the scenes. After installing local_resort_courses, as soon as a course has been added or modified in a category, local_resort_courses verifies that the containing category page is automatically sorted just as it would be sorted when you click the "Re-sort courses by name" button on the category page.
-To configure the behaviour of the plugin, please visit Plugins -> Local plugins -> Re-sort courses.
+To configure the behaviour of the plugin, please visit Site Administration -> Courses -> Re-sort courses.
 
 There, you find two sections:
 
