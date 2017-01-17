@@ -23,7 +23,7 @@ Usage & Settings
 ----------------
 
 The local_resort_courses plugin acts completely behind the scenes. After installing local_resort_courses, as soon as a course has been added or modified in a category, local_resort_courses verifies that the containing category page is automatically sorted just as it would be sorted when you click the "Re-sort courses by name" button on the category page.
-To configure the behaviour of the plugin, please visit Site Administration -> Courses -> Re-sort courses.
+To configure the behaviour of the plugin, please visit Site administration -> Courses -> Re-sort courses.
 
 There, you find two sections:
 
@@ -64,7 +64,7 @@ Right-to-left support
 ---------------------
 
 This plugin has not been tested with Moodle's support for right-to-left (RTL) languages.
-If you want to use this plugin with a RTL language and it doesn't work as-is, you are free to send me a pull request on
+If you want to use this plugin with a RTL language and it doesn't work as-is, you are free to send us a pull request on
 github with modifications.
 
 
