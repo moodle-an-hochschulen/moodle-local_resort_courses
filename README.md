@@ -1,6 +1,8 @@
 moodle-local_resort_courses
 ===========================
 
+[![Build Status](https://travis-ci.org/moodleuulm/moodle-local_resort_courses.svg?branch=master)](https://travis-ci.org/moodleuulm/moodle-local_resort_courses)
+
 Moodle plugin which sorts a category page automatically as soon as a course has been added or modified
 
 
