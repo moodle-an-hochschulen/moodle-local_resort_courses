@@ -41,48 +41,54 @@ define('RESORT_COURSES_SORT_STARTDATE_DESC', 8);
  * @return bool
  */
 function resort_courses($eventdata) {
-    global $DB, $CFG;
+    global $DB;
 
-    // Get plugin config
+    // Get plugin config.
     $config = get_config('local_resort_courses');
 
-
-    // Get course (because we need its categor)
+    // Get course (because we need its category).
     $eventcourse = get_course($eventdata->objectid);
     if (!$eventcourse) {
-        return true; // Now we have an error, but if we return false, the event will stay in the event queue -> let's return and leave the category unsorted
+        // Now we have an error, but if we return false, the event will stay in the event queue.
+        // Let's return and leave the category unsorted.
+        return true;
     }
 
-    // Get category
+    // Get category.
     $category = $DB->get_record('course_categories', array('id' => $eventcourse->category));
     if (!$category) {
-        return true; // Now we have an error, but if we return false, the event will stay in the event queue -> let's return and leave the category unsorted
+        // Now we have an error, but if we return false, the event will stay in the event queue.
+        // Let's return and leave the category unsorted.
+        return true;
     }
 
-    // Check if category has to be skipped according to plugin settings
+    // Check if category has to be skipped according to plugin settings.
     if (!empty($config->skipcategories)) {
         $skipcategories = explode(',', $config->skipcategories);
         if (is_array($skipcategories)) {
             if (in_array($category->id, $skipcategories)) {
-                return true; // Category has to be skipped -> let's return and leave the category unsorted
+                // Category has to be skipped.
+                // Let's return and leave the category unsorted.
+                return true;
             }
         }
     }
 
-    // Check if we skip categories recursively and one of category's parents has to be skipped according to plugin settings
+    // Check if we skip categories recursively and one of category's parents has to be skipped according to plugin settings.
     if ($config->skipcategoriesrecursively == true) {
         if (is_array($skipcategories)) {
             $parents = explode("/", $category->path);
             foreach ($parents as $p) {
                 if (in_array($p, $skipcategories)) {
-                    return true; // Category has to be skipped -> let's return and leave the category unsorted
+                    // Category has to be skipped.
+                    // Let's return and leave the category unsorted.
+                    return true;
                 }
             }
         }
     }
 
-
-    // Set sortorder sql clause
+    // Set sortorder sql clause.
     switch($config->sortorder) {
         case RESORT_COURSES_SORT_FULLNAME_ASC:
             $sortsql = "lower(c.fullname) ASC";
@@ -112,19 +118,19 @@ function resort_courses($eventdata) {
             $sortsql = "lower(c.fullname) ASC";
     }
 
-
-    // Re-sort category - borrowed from /course/category.php line 61
-    // TODO: category.php now uses asort_objects_by_property(), change sorting method to this method instead of SQL sorting as soon as it becomes necessary for this plugin
+    // Re-sort category - borrowed from /course/category.php line 61.
+    // TODO: category.php now uses asort_objects_by_property(), change sorting method to this method
+    // instead of SQL sorting as soon as it becomes necessary for this plugin.
     if ($courses = get_courses($category->id, $sortsql, 'c.id,c.fullname,c.sortorder')) {
         $i = 1;
         foreach ($courses as $course) {
-            $DB->set_field('course', 'sortorder', $category->sortorder+$i, array('id'=>$course->id));
+            $DB->set_field('course', 'sortorder', $category->sortorder + $i, array('id' => $course->id));
             $i++;
         }
-        fix_course_sortorder(); // should not be needed
+        fix_course_sortorder(); // Should not be needed.
     }
 
-    // Log the event
+    // Log the event.
     $logevent = \local_resort_courses\event\courses_sorted::create(array(
         'objectid' => $category->id,
         'context' => context_coursecat::instance($category->id)

@@ -6,6 +6,7 @@ Changes
 
 ### Unreleased
 
+* 2017-05-29 - Make codechecker happier
 * 2017-05-29 - Add Travis CI support
 
 ### v3.2-r2

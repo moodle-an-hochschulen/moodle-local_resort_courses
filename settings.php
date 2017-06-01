@@ -27,16 +27,20 @@ defined('MOODLE_INTERNAL') || die();
 require_once(dirname(__FILE__) . '/locallib.php');
 
 if ($hassiteconfig) {
-    // New settings page
+    // New settings page.
     $page = new admin_settingpage('resort_courses', get_string('pluginname', 'local_resort_courses', null, true));
 
 
     if ($ADMIN->fulltree) {
-        // Sort order
-        $page->add(new admin_setting_heading('local_resort_courses/sortorderheading', get_string('sortorder', 'local_resort_courses', null, true), ''));
+        // Sort order.
+        $page->add(new admin_setting_heading('local_resort_courses/sortorderheading',
+                get_string('sortorder', 'local_resort_courses', null, true),
+                ''));
 
-        // Create sort order widget
-        $sortorders[RESORT_COURSES_SORT_FULLNAME_ASC] = get_string('sortfullnameasc', 'local_resort_courses', null, false); // Don't use string lazy loading here because the string will be directly used and would produce a PHP warning otherwise
+        // Create sort order widget.
+        $sortorders[RESORT_COURSES_SORT_FULLNAME_ASC] = get_string('sortfullnameasc', 'local_resort_courses', null, false);
+                // Don't use string lazy loading here because the string will be directly used and
+                // would produce a PHP warning otherwise.
         $sortorders[RESORT_COURSES_SORT_FULLNAME_DESC] = get_string('sortfullnamedesc', 'local_resort_courses', null, true);
         $sortorders[RESORT_COURSES_SORT_SHORTNAME_ASC] = get_string('sortshortnameasc', 'local_resort_courses', null, true);
         $sortorders[RESORT_COURSES_SORT_SHORTNAME_DESC] = get_string('sortshortnamedesc', 'local_resort_courses', null, true);
@@ -44,25 +48,39 @@ if ($hassiteconfig) {
         $sortorders[RESORT_COURSES_SORT_COURSEID_DESC] = get_string('sortcourseiddesc', 'local_resort_courses', null, true);
         $sortorders[RESORT_COURSES_SORT_STARTDATE_ASC] = get_string('sortstartdateasc', 'local_resort_courses', null, true);
         $sortorders[RESORT_COURSES_SORT_STARTDATE_DESC] = get_string('sortstartdatedesc', 'local_resort_courses', null, true);
-        $page->add(new admin_setting_configselect('local_resort_courses/sortorder', get_string('sortorder', 'local_resort_courses', null, true), get_string('sortorder_desc', 'local_resort_courses', null, true), RESORT_COURSES_SORT_FULLNAME_ASC, $sortorders));
+        $page->add(new admin_setting_configselect('local_resort_courses/sortorder',
+                get_string('sortorder', 'local_resort_courses', null, true),
+                get_string('sortorder_desc', 'local_resort_courses', null, true),
+                RESORT_COURSES_SORT_FULLNAME_ASC,
+                $sortorders));
 
 
-        // Skip categories
-        $page->add(new admin_setting_heading('local_resort_courses/skipcategoriesheading', get_string('skipcategories', 'local_resort_courses', null, true), ''));
+        // Skip categories.
+        $page->add(new admin_setting_heading('local_resort_courses/skipcategoriesheading',
+                get_string('skipcategories', 'local_resort_courses', null, true),
+                ''));
 
-        // Create skip categories widget
+        // Create skip categories widget.
         require_once($CFG->dirroot.'/course/lib.php');
         $categories = make_categories_options();
         foreach ($categories as $id => $category) {
-            $categories[$id] = html_entity_decode($category); // This is needed because of MDL-57678 until this problem is fixed in Moodle core
+            // This is needed because of MDL-57678 until this problem is fixed in Moodle core.
+            $categories[$id] = html_entity_decode($category);
         }
-        $page->add(new admin_setting_configmultiselect('local_resort_courses/skipcategories', get_string('skipcategories', 'local_resort_courses', null, true), get_string('skipcategories_desc', 'local_resort_courses', null, true), null, $categories));
+        $page->add(new admin_setting_configmultiselect('local_resort_courses/skipcategories',
+                get_string('skipcategories', 'local_resort_courses', null, true),
+                get_string('skipcategories_desc', 'local_resort_courses', null, true),
+                null,
+                $categories));
 
-        // Create skip categories recursively widget
-        $page->add(new admin_setting_configcheckbox('local_resort_courses/skipcategoriesrecursively', get_string('skipcategoriesrecursively', 'local_resort_courses', null, true), get_string('skipcategoriesrecursively_desc', 'local_resort_courses', null, true), 0));
+        // Create skip categories recursively widget.
+        $page->add(new admin_setting_configcheckbox('local_resort_courses/skipcategoriesrecursively',
+                get_string('skipcategoriesrecursively', 'local_resort_courses', null, true),
+                get_string('skipcategoriesrecursively_desc', 'local_resort_courses', null, true),
+                0));
     }
 
 
-    // Add settings page to navigation tree
+    // Add settings page to navigation tree.
     $ADMIN->add('courses', $page);
 }
