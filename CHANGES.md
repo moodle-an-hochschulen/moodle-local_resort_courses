@@ -4,7 +4,7 @@ moodle-local_resort_courses
 Changes
 -------
 
-### Unreleased
+### v3.2-r3
 
 * 2017-05-29 - Make codechecker happier
 * 2017-05-29 - Add Travis CI support
