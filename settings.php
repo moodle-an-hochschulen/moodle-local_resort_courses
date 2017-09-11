@@ -24,7 +24,8 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-require_once(dirname(__FILE__) . '/locallib.php');
+require_once(__DIR__ . '/locallib.php');
+require_once($CFG->dirroot.'/course/lib.php');
 
 if ($hassiteconfig) {
     // New settings page.
@@ -61,7 +62,6 @@ if ($hassiteconfig) {
                 ''));
 
         // Create skip categories widget.
-        require_once($CFG->dirroot.'/course/lib.php');
         $categories = make_categories_options();
         foreach ($categories as $id => $category) {
             // This is needed because of MDL-57678 until this problem is fixed in Moodle core.
