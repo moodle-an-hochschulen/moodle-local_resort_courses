@@ -9,7 +9,7 @@ Moodle plugin which sorts a category page automatically as soon as a course has 
 Requirements
 ------------
 
-This plugin requires Moodle 3.2+
+This plugin requires Moodle 3.3+
 
 
 Motivation for this plugin
@@ -36,7 +36,7 @@ Usage & Settings
 
 After installing the plugin, it is active and fully working.
 
-As soon as a course has been added or modified in a category, the plugin verifies that the containing category page is automatically sorted just as it would be sorted when you click the "Re-sort courses by name" button on the category page.
+As soon as a course has been added or modified in a category, the plugin verifies that the containing category page is automatically sorted just as it would be sorted when you change the sorting filter on the course category management page.
 
 To configure the plugin and its behaviour, please visit:
 Site administration -> Courses -> Re-sort courses.
@@ -45,7 +45,7 @@ There, you find two sections:
 
 ### 1. Sort order
 
-By default, local_resort_courses sorts categories by course full name in ascending order, just as the "Re-sort courses by name" button on the category page does. By setting the "Sort order" setting to another value, you can control the sort order of the course list.
+By default, local_resort_courses sorts categories by course full name in ascending order, just as the filter on the course category management page is set by default. By setting the "Sort order" setting to another value, you can control the sort order of the course list.
 
 ### 2. Skip categories
 
@@ -130,9 +130,8 @@ If you want to use this plugin with a RTL language and it doesn't work as-is, yo
 PHP7 Support
 ------------
 
-Since Moodle 3.0, Moodle core basically supports PHP7.
-Please note that PHP7 support is on our roadmap for this plugin, but it has not yet been thoroughly tested for PHP7 support and we are still running it in production on PHP5.
-If you encounter any success or failure with this plugin and PHP7, please let us know.
+Moodle core recommends PHP7. Starting with the Moodle 3.3 release of this plugin, we are developing and testing it for PHP7 only.
+If you are still running this plugin on PHP5, please think about upgrading to PHP7.
 
 
 Copyright
