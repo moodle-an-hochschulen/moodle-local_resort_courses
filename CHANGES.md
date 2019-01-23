@@ -4,7 +4,7 @@ moodle-local_resort_courses
 Changes
 -------
 
-### Unreleased
+### v3.6-r1
 
 * 2019-01-23 - Check compatibility for Moodle 3.6, no functionality change.
 * 2018-12-05 - Changed travis.yml due to upstream changes.
