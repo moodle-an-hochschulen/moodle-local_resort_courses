@@ -121,7 +121,7 @@ function resort_courses($eventdata) {
     // Re-sort category - borrowed from /course/category.php line 61.
     // TODO: category.php now uses asort_objects_by_property(), change sorting method to this method
     // instead of SQL sorting as soon as it becomes necessary for this plugin.
-    if ($courses = get_courses($category->id, $sortsql, 'c.id,c.fullname,c.sortorder')) {
+    if ($courses = get_courses($category->id, $sortsql, 'c.id,c.fullname,c.sortorder, c.visible')) {
         $i = 1;
         foreach ($courses as $course) {
             $DB->set_field('course', 'sortorder', $category->sortorder + $i, array('id' => $course->id));

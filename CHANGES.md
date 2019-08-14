@@ -6,6 +6,7 @@ Changes
 
 ### Unreleased
 
+* 2019-08-14 - Fixed bug when adding a course to a category.
 * 2019-08-14 - Prepare compatibility for Moodle 3.7.
 
 ### v3.6-r1
