@@ -4,7 +4,7 @@ moodle-local_resort_courses
 Changes
 -------
 
-### Unreleased
+### v3.7-r1
 
 * 2019-08-14 - Added behat tests.
 * 2019-08-14 - Fixed bug when adding a course to a category.
