@@ -4,6 +4,10 @@ moodle-local_resort_courses
 Changes
 -------
 
+### Unreleased
+
+* 2019-12-11 - Prevent that this plugin breaks Moodle core PHPUnit tests when installed on a site - Credits to eWallah.
+
 ### v3.7-r1
 
 * 2019-08-14 - Added behat tests.
