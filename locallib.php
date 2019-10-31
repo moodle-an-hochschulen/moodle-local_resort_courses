@@ -43,6 +43,11 @@ define('RESORT_COURSES_SORT_STARTDATE_DESC', 8);
 function resort_courses($eventdata) {
     global $DB;
 
+    // Do not resort while testing.
+    if ((defined('PHPUNIT_TEST') && PHPUNIT_TEST)) {
+        return true;
+    }
+
     // Get plugin config.
     $config = get_config('local_resort_courses');
 
