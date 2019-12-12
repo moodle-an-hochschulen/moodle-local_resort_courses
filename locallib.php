@@ -43,6 +43,13 @@ define('RESORT_COURSES_SORT_STARTDATE_DESC', 8);
 function resort_courses($eventdata) {
     global $DB;
 
+    // Do not re-sort while testing Moodle core with PHPUnit.
+    // This plugin does not use PHPUnit at the moment, but it does break some core PHPUnit tests when installed on a site.
+    // Thus, skipping re-sorting is fine at the moment.
+    if ((defined('PHPUNIT_TEST') && PHPUNIT_TEST)) {
+        return true;
+    }
+
     // Get plugin config.
     $config = get_config('local_resort_courses');
 
