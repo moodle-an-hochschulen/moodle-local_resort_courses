@@ -6,6 +6,7 @@ Changes
 
 ### Unreleased
 
+* 2020-02-13 - Prepare compatibility for Moodle 3.8.
 * 2019-12-11 - Prevent that this plugin breaks Moodle core PHPUnit tests when installed on a site - Credits to eWallah.
 
 ### v3.7-r1
