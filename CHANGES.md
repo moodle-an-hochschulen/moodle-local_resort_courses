@@ -6,6 +6,8 @@ Changes
 
 ### Unreleased
 
+* 2020-11-24 - Improvement: After MDL-57678 was integrated to Moodle core, remove local workaround for the fact that the select categories widgets did not properly handle &nbsp;.
+               Please note: This raises the required Moodle core version to 3.9.2.
 * 2020-11-24 - Prepare compatibility for Moodle 3.9.
 
 ### v3.8-r1
