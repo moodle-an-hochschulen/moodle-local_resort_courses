@@ -35,12 +35,12 @@ define('RESORT_COURSES_SORT_STARTDATE_DESC', 8);
 
 
 /**
- * Event handler function
+ * Event handler function which is called after an event was caught and which triggers the sorting of the course's category.
  *
  * @param object $eventdata Event data
  * @return bool
  */
-function resort_courses($eventdata) {
+function resort_course_eventhandler($eventdata) {
     global $DB;
 
     // Do not re-sort while testing Moodle core with PHPUnit.
@@ -68,6 +68,49 @@ function resort_courses($eventdata) {
         // Let's return and leave the category unsorted.
         return true;
     }
+
+    // Sort category.
+    resort_course_category($category, false);
+
+    // Always return true even if something went wrong as, if we would return false, the event would stay in the event queue.
+    return true;
+}
+
+/**
+ * Function to sort all course categories based on a scheduled task.
+ */
+function resort_courses_cron() {
+    // Get all course categories.
+    $allcategories = core_course_category::get_all();
+
+    // Start cron log output.
+    mtrace('[local_resort_courses] Starting re-sorting of all categories');
+
+    // Iterate over all categories.
+    foreach ($allcategories as $category) {
+        // Cron log output.
+        mtrace('[local_resort_courses] ... Re-sorting category '.$category->id.' (Path: '.$category->path.' | Name: '.$category->name.')');
+
+        // Sort the category.
+        resort_course_category($category, true);
+    }
+
+    // End cron log output.
+    mtrace('[local_resort_courses] Finished re-sorting of all categories');
+}
+
+/**
+ * Function to sort a single course category.
+ *
+ * @param object $category The category to be sorted.
+ * @param bool $cronrunning The fact that the re-sorting was triggered by the scheduled task.
+ * @return bool
+ */
+function resort_course_category($category, $cronrunning = false) {
+    global $DB;
+
+    // Get plugin config.
+    $config = get_config('local_resort_courses');
 
     // Check if category has to be skipped according to plugin settings.
     if (!empty($config->skipcategories)) {
@@ -125,24 +168,39 @@ function resort_courses($eventdata) {
             $sortsql = "lower(c.fullname) ASC";
     }
 
-    // Re-sort category - borrowed from /course/category.php line 61.
-    // TODO: category.php now uses asort_objects_by_property(), change sorting method to this method
-    // instead of SQL sorting as soon as it becomes necessary for this plugin.
-    if ($courses = get_courses($category->id, $sortsql, 'c.id,c.fullname,c.sortorder, c.visible')) {
+    // Re-sort course category.
+    // This is a subset of the function core_course_category::resort_courses().
+    // We don't directly use this function as
+    // a) it was not there when this plugin was built and does not support sorting by startdate unfortunately.
+    // b) it does some additional formatting of the course names before sorting which we don't necessarily expect and need.
+
+    // Get courses within category.
+    $courses = get_courses($category->id, $sortsql, 'c.id, c.fullname, c.sortorder, c.visible');
+
+    // If there are any courses in the category.
+    if (count($courses) > 0) {
+        // Do the resorting.
         $i = 1;
         foreach ($courses as $course) {
             $DB->set_field('course', 'sortorder', $category->sortorder + $i, array('id' => $course->id));
             $i++;
         }
-        fix_course_sortorder(); // Should not be needed.
+
+        // Cleanup - This should not be needed but we do it just to be safe.
+        fix_course_sortorder();
+        cache_helper::purge_by_event('changesincourse');
+
+        // Log the event.
+        $logevent = \local_resort_courses\event\courses_sorted::create(array(
+            'objectid' => $category->id,
+            'context' => context_coursecat::instance($category->id),
+            'other' => array(
+                'cronrunning' => $cronrunning,
+            )
+        ));
+        $logevent->trigger();
     }
 
-    // Log the event.
-    $logevent = \local_resort_courses\event\courses_sorted::create(array(
-        'objectid' => $category->id,
-        'context' => context_coursecat::instance($category->id)
-    ));
-    $logevent->trigger();
-
+    // If we have arrived here, the category should be sorted.
     return true;
 }

@@ -59,6 +59,8 @@ How this plugin works
 
 This plugin simply catches the course_created and course_updated events which are fired when a course is created and updates and sorts the course's category automatically. That's it.
 
+Additionally, there is a scheduled task local_resort_courses\task\resort_courses which is disabled by default but which can be enabled to make sure that all categories are sorted properly in any case.
+
 
 Theme support
 -------------

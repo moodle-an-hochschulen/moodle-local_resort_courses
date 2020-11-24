@@ -59,7 +59,11 @@ class courses_sorted extends \core\event\base {
      * @return string
      */
     public function get_description() {
-        return get_string('eventcoursessorted_desc', 'local_resort_courses', $this->objectid);
+        if ($this->other['cronrunning'] == true) {
+            return get_string('eventcoursessortedcron_desc', 'local_resort_courses', $this->objectid);
+        } else {
+            return get_string('eventcoursessorted_desc', 'local_resort_courses', $this->objectid);
+        }
     }
 
     /**

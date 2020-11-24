@@ -15,17 +15,24 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Local plugin "resort courses" - Versions file
+ * Local plugin "resort courses" - Scheduled tasks
  *
  * @package    local_resort_courses
- * @copyright  2013 Alexander Bias, Ulm University <alexander.bias@uni-ulm.de>
+ * @copyright  2020 Alexander Bias, Ulm University <alexander.bias@uni-ulm.de>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->component = 'local_resort_courses';
-$plugin->version = 2020112401;
-$plugin->release = 'v3.8-r1';
-$plugin->requires = 2020061502;
-$plugin->maturity = MATURITY_STABLE;
+$tasks = array(
+        array(
+                'classname' => 'local_resort_courses\task\resort_courses',
+                'blocking' => 0,
+                'minute' => '0',
+                'hour' => '2',
+                'day' => '*',
+                'month' => '*',
+                'dayofweek' => '0',
+                'disabled' => 1
+        )
+);
