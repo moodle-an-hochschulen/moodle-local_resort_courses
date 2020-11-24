@@ -4,6 +4,10 @@ moodle-local_resort_courses
 Changes
 -------
 
+### Unreleased
+
+* 2020-11-24 - Prepare compatibility for Moodle 3.9.
+
 ### v3.8-r1
 
 * 2020-02-13 - Prepare compatibility for Moodle 3.8.

@@ -9,7 +9,7 @@ Moodle plugin which sorts a category page automatically as soon as a course has 
 Requirements
 ------------
 
-This plugin requires Moodle 3.8+
+This plugin requires Moodle 3.9+
 
 
 Motivation for this plugin
