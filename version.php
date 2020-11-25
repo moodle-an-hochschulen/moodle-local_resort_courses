@@ -25,7 +25,7 @@
 defined('MOODLE_INTERNAL') || die();
 
 $plugin->component = 'local_resort_courses';
-$plugin->version = 2020112401;
-$plugin->release = 'v3.8-r1';
+$plugin->version = 2020112500;
+$plugin->release = 'v3.9-r1';
 $plugin->requires = 2020061502;
 $plugin->maturity = MATURITY_STABLE;

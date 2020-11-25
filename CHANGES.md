@@ -4,7 +4,7 @@ moodle-local_resort_courses
 Changes
 -------
 
-### Unreleased
+### v3.9-r1
 
 * 2020-11-24 - Feature: Add a scheduled task which will re-sort all categories in the Moodle instance to make sure that all categories are sorted properly in any case.
                Please note: This scheduled task is disabled by default.
