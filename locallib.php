@@ -50,9 +50,6 @@ function resort_course_eventhandler($eventdata) {
         return true;
     }
 
-    // Get plugin config.
-    $config = get_config('local_resort_courses');
-
     // Get course (because we need its category).
     $eventcourse = get_course($eventdata->objectid);
     if (!$eventcourse) {
@@ -89,7 +86,8 @@ function resort_courses_cron() {
     // Iterate over all categories.
     foreach ($allcategories as $category) {
         // Cron log output.
-        mtrace('[local_resort_courses] ... Re-sorting category '.$category->id.' (Path: '.$category->path.' | Name: '.$category->name.')');
+        mtrace('[local_resort_courses] ... Re-sorting category '.$category->id.
+                ' (Path: '.$category->path.' | Name: '.$category->name.')');
 
         // Sort the category.
         resort_course_category($category, true);

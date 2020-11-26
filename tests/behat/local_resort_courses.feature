@@ -238,22 +238,22 @@ Feature: Using the local_resort_courses plugin
       | config    | value | plugin               |
       | sortorder | 2     | local_resort_courses |
     When I log in as "admin"
-      And I am on course index
-      And I follow "Category A"
-      Then "CCC Course" "link" should appear before "ZZZ Course" "link"
-      And "AAA Course" "link" should appear before "CCC Course" "link"
-      And I follow "Category C"
-      And "EEE Course" "link" should appear before "FFF Course" "link"
-      And I am on course index
-      And I follow "Category B"
-      And "BBB Course" "link" should appear before "DDD Course" "link"
+    And I am on course index
+    And I follow "Category A"
+    Then "CCC Course" "link" should appear before "ZZZ Course" "link"
+    And "AAA Course" "link" should appear before "CCC Course" "link"
+    And I follow "Category C"
+    And "EEE Course" "link" should appear before "FFF Course" "link"
+    And I am on course index
+    And I follow "Category B"
+    And "BBB Course" "link" should appear before "DDD Course" "link"
     When I run the scheduled task "local_resort_courses\task\resort_courses"
-      And I am on course index
-      And I follow "Category A"
-      Then "ZZZ Course" "link" should appear before "CCC Course" "link"
-      And "CCC Course" "link" should appear before "AAA Course" "link"
-      And I follow "Category C"
-      And "FFF Course" "link" should appear before "EEE Course" "link"
-      And I am on course index
-      And I follow "Category B"
-      And "DDD Course" "link" should appear before "BBB Course" "link"
+    And I am on course index
+    And I follow "Category A"
+    Then "ZZZ Course" "link" should appear before "CCC Course" "link"
+    And "CCC Course" "link" should appear before "AAA Course" "link"
+    And I follow "Category C"
+    And "FFF Course" "link" should appear before "EEE Course" "link"
+    And I am on course index
+    And I follow "Category B"
+    And "DDD Course" "link" should appear before "BBB Course" "link"
