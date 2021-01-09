@@ -4,6 +4,10 @@ moodle-local_resort_courses
 Changes
 -------
 
+### Unreleased
+
+* 2021-01-06 - Improvement: Declare which major stable version of Moodle this plugin supports (see MDL-59562 for details).
+
 ### v3.9-r1
 
 * 2020-11-24 - Feature: Add a scheduled task which will re-sort all categories in the Moodle instance to make sure that all categories are sorted properly in any case.
