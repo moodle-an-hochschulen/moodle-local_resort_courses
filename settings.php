@@ -62,7 +62,7 @@ if ($hassiteconfig) {
                 ''));
 
         // Create skip categories widget.
-        $categories = make_categories_options();
+        $categories = \core_course_category::make_categories_list();
         $page->add(new admin_setting_configmultiselect('local_resort_courses/skipcategories',
                 get_string('skipcategories', 'local_resort_courses', null, true),
                 get_string('skipcategories_desc', 'local_resort_courses', null, true),
