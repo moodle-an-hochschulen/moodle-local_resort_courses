@@ -4,6 +4,10 @@ moodle-local_resort_courses
 Changes
 -------
 
+### Unreleased
+
+* 2021-02-05 - Move Moodle Plugin CI from Travis CI to Github actions
+
 ### v3.10-r1
 
 * 2021-01-09 - Replace the deprecated function call make_categories_options()
