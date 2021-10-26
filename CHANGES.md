@@ -4,7 +4,7 @@ moodle-local_resort_courses
 Changes
 -------
 
-### Unreleased
+### v3.11-r2
 
 * 2021-10-26 - Raise the version in version.php which was missed in v3.11-r1
 
