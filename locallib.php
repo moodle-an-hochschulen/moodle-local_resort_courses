@@ -22,8 +22,6 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die;
-
 define('RESORT_COURSES_SORT_FULLNAME_ASC', 1);
 define('RESORT_COURSES_SORT_FULLNAME_DESC', 2);
 define('RESORT_COURSES_SORT_SHORTNAME_ASC', 3);

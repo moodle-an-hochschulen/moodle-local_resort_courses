@@ -24,8 +24,6 @@
 
 namespace local_resort_courses\event;
 
-defined('MOODLE_INTERNAL') || die();
-
 /**
  * The local_resort_courses courses sorted event class.
  *

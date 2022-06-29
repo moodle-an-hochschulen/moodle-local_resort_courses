@@ -24,8 +24,6 @@
 
 namespace local_resort_courses\task;
 
-defined('MOODLE_INTERNAL') || die;
-
 /**
  * The local_resort_courses scheduled task class for re-sorting all courses in all categories.
  *
