@@ -54,6 +54,12 @@ By default, local_resort_courses handles re-sort jobs for every category. By sel
 By default, when you select one or multiple categories in the "Skip categories" setting, local_resort_courses skips only the categories which are selected in the preceding setting. By checking the "Skip categories recursively" setting, you can define that local_resort_courses should skip the selected categories and all of their descendant categories when handling re-sort jobs.
 
 
+Capabilities
+------------
+
+This plugin does not add any additional capabilities.
+
+
 How this plugin works
 ---------------------
 
