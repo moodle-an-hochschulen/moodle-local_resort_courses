@@ -24,15 +24,16 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-require_once(__DIR__ . '/locallib.php');
-require_once($CFG->dirroot.'/course/lib.php');
-
 if ($hassiteconfig) {
     // New settings page.
     $page = new admin_settingpage('resort_courses', get_string('pluginname', 'local_resort_courses', null, true));
 
 
     if ($ADMIN->fulltree) {
+        // Require necessary libraries.
+        require_once(__DIR__ . '/locallib.php');
+        require_once($CFG->dirroot.'/course/lib.php');
+
         // Sort order.
         $page->add(new admin_setting_heading('local_resort_courses/sortorderheading',
                 get_string('sortorder', 'local_resort_courses', null, true),
