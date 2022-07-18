@@ -4,7 +4,7 @@ moodle-local_resort_courses
 Changes
 -------
 
-### Unreleased
+### v4.0-r1
 
 * 2022-07-12 - Require libraries in settings.php only if necessary.
 * 2022-07-12 - Fix Behat tests which broke with Moodle 4.0.
