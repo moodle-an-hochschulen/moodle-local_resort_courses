@@ -19,6 +19,7 @@ Feature: Using the local_resort_courses plugin
       | Ice Age 2   | iceage2   | 15       | catsequels | ##today##                  |
       | Shrek 2     | shrek2    | 16       | catsequels | ##today##                  |
 
+  @javascript
   Scenario: Sort courses by full name ascending order
     Given the following config values are set as admin:
       | config    | value | plugin               |
@@ -27,14 +28,18 @@ Feature: Using the local_resort_courses plugin
     And I am on course index
     And I follow "Series"
     And "House M.D." "link" should appear before "The X Files" "link"
-    And I click on "Add a new course" "button"
+    And I click on "More" "button"
+    And I click on "Add a new course" "link"
     And I set the following fields to these values:
       | Course full name  | Lucifer |
       | Course short name | lucifer |
-    And I click on "Save and return" "button"
+    And I click on "Save and display" "button"
+    And I am on course index
+    And I follow "Series"
     Then "House M.D." "link" should appear before "Lucifer" "link"
     And "Lucifer" "link" should appear before "The X Files" "link"
 
+  @javascript
   Scenario: Sort courses by full name descending order
     Given the following config values are set as admin:
       | config    | value | plugin               |
@@ -43,14 +48,18 @@ Feature: Using the local_resort_courses plugin
     And I am on course index
     And I follow "Series"
     And "House M.D." "link" should appear before "The X Files" "link"
-    And I click on "Add a new course" "button"
+    And I click on "More" "button"
+    And I click on "Add a new course" "link"
     And I set the following fields to these values:
       | Course full name  | Lucifer |
       | Course short name | lucifer |
-    And I click on "Save and return" "button"
+    And I click on "Save and display" "button"
+    And I am on course index
+    And I follow "Series"
     Then "The X Files" "link" should appear before "Lucifer" "link"
     And "Lucifer" "link" should appear before "House M.D." "link"
 
+  @javascript
   Scenario: Sort courses by short name ascending order
     Given the following config values are set as admin:
       | config    | value | plugin               |
@@ -59,14 +68,18 @@ Feature: Using the local_resort_courses plugin
     And I am on course index
     And I follow "Series"
     And "House M.D." "link" should appear before "The X Files" "link"
-    And I click on "Add a new course" "button"
+    And I click on "More" "button"
+    And I click on "Add a new course" "link"
     And I set the following fields to these values:
       | Course full name  | Lucifer |
       | Course short name | lucifer |
-    And I click on "Save and return" "button"
+    And I click on "Save and display" "button"
+    And I am on course index
+    And I follow "Series"
     Then "House M.D." "link" should appear before "Lucifer" "link"
     And "Lucifer" "link" should appear before "The X Files" "link"
 
+  @javascript
   Scenario: Sort courses by short name descending order
     Given the following config values are set as admin:
       | config    | value | plugin               |
@@ -75,14 +88,18 @@ Feature: Using the local_resort_courses plugin
     And I am on course index
     And I follow "Series"
     And "House M.D." "link" should appear before "The X Files" "link"
-    And I click on "Add a new course" "button"
+    And I click on "More" "button"
+    And I click on "Add a new course" "link"
     And I set the following fields to these values:
       | Course full name  | Lucifer |
       | Course short name | lucifer |
-    And I click on "Save and return" "button"
+    And I click on "Save and display" "button"
+    And I am on course index
+    And I follow "Series"
     Then "The X Files" "link" should appear before "Lucifer" "link"
     And "Lucifer" "link" should appear before "House M.D." "link"
 
+  @javascript
   Scenario: Sort courses by ID in ascending order
     Given the following config values are set as admin:
       | config    | value | plugin               |
@@ -91,15 +108,19 @@ Feature: Using the local_resort_courses plugin
     And I am on course index
     And I follow "Series"
     And "House M.D." "link" should appear before "The X Files" "link"
-    And I click on "Add a new course" "button"
+    And I click on "More" "button"
+    And I click on "Add a new course" "link"
     And I set the following fields to these values:
       | Course full name  | Lucifer |
       | Course short name | lucifer |
       | Course ID number  | 11      |
-    And I click on "Save and return" "button"
+    And I click on "Save and display" "button"
+    And I am on course index
+    And I follow "Series"
     Then "House M.D." "link" should appear before "Lucifer" "link"
     And "Lucifer" "link" should appear before "The X Files" "link"
 
+  @javascript
   Scenario: Sort courses by ID in descending order
     Given the following config values are set as admin:
       | config    | value | plugin               |
@@ -108,15 +129,19 @@ Feature: Using the local_resort_courses plugin
     And I am on course index
     And I follow "Series"
     And "House M.D." "link" should appear before "The X Files" "link"
-    And I click on "Add a new course" "button"
+    And I click on "More" "button"
+    And I click on "Add a new course" "link"
     And I set the following fields to these values:
       | Course full name  | Lucifer |
       | Course short name | lucifer |
       | Course ID number  | 11      |
-    And I click on "Save and return" "button"
+    And I click on "Save and display" "button"
+    And I am on course index
+    And I follow "Series"
     Then "The X Files" "link" should appear before "Lucifer" "link"
     And "Lucifer" "link" should appear before "House M.D." "link"
 
+  @javascript
   Scenario: Sort courses by start date in ascending order
     Given the following config values are set as admin:
       | config    | value | plugin               |
@@ -125,15 +150,19 @@ Feature: Using the local_resort_courses plugin
     And I am on course index
     And I follow "Series"
     And "House M.D." "link" should appear before "The X Files" "link"
-    And I click on "Add a new course" "button"
+    And I click on "More" "button"
+    And I click on "Add a new course" "link"
     And I set the following fields to these values:
       | Course full name  | Lucifer |
       | Course short name | lucifer |
       # Start date will be automatically set to tomorrow.
-    And I click on "Save and return" "button"
+    And I click on "Save and display" "button"
+    And I am on course index
+    And I follow "Series"
     Then "House M.D." "link" should appear before "Lucifer" "link"
     And "Lucifer" "link" should appear before "The X Files" "link"
 
+  @javascript
   Scenario: Sort courses by start date in descending order
     Given the following config values are set as admin:
       | config    | value | plugin               |
@@ -142,15 +171,19 @@ Feature: Using the local_resort_courses plugin
     And I am on course index
     And I follow "Series"
     And "House M.D." "link" should appear before "The X Files" "link"
-    And I click on "Add a new course" "button"
+    And I click on "More" "button"
+    And I click on "Add a new course" "link"
     And I set the following fields to these values:
       | Course full name  | Lucifer |
       | Course short name | lucifer |
       # Start date will be automatically set to tomorrow.
-    And I click on "Save and return" "button"
+    And I click on "Save and display" "button"
+    And I am on course index
+    And I follow "Series"
     Then "The X Files" "link" should appear before "Lucifer" "link"
     And "Lucifer" "link" should appear before "House M.D." "link"
 
+  @javascript
   Scenario: Sort courses by full name ascending order but skip category Movies
     Given the following config values are set as admin:
       | config         | value  | plugin               |
@@ -165,14 +198,18 @@ Feature: Using the local_resort_courses plugin
     And I am on course index
     And I follow "Movies"
     And "Avatar" "link" should appear before "Ice Age" "link"
-    And I click on "Add a new course" "button"
+    And I click on "More" "button"
+    And I click on "Add a new course" "link"
     And I set the following fields to these values:
       | Course full name  | E.T. |
       | Course short name | et   |
-    And I click on "Save and return" "button"
+    And I click on "Save and display" "button"
+    And I am on course index
+    And I follow "Movies"
     Then "Avatar" "link" should appear before "Ice Age" "link"
     And "E.T." "link" should appear before "Avatar" "link"
 
+  @javascript
   Scenario: Sort courses by full name ascending order but skip category Movies and check for non skipped category
     Given the following config values are set as admin:
       | config         | value  | plugin               |
@@ -187,14 +224,18 @@ Feature: Using the local_resort_courses plugin
     And I am on course index
     And I follow "Series"
     And "House M.D." "link" should appear before "The X Files" "link"
-    And I click on "Add a new course" "button"
+    And I click on "More" "button"
+    And I click on "Add a new course" "link"
     And I set the following fields to these values:
       | Course full name  | Lucifer |
       | Course short name | lucifer |
-    And I click on "Save and return" "button"
+    And I click on "Save and display" "button"
+    And I am on course index
+    And I follow "Series"
     Then "House M.D." "link" should appear before "Lucifer" "link"
     And "Lucifer" "link" should appear before "The X Files" "link"
 
+  @javascript
   Scenario: Sort courses by full name ascending order but skip category Movies recursively
     Given the following config values are set as admin:
       | config                    | value  | plugin               |
@@ -211,11 +252,15 @@ Feature: Using the local_resort_courses plugin
     And I follow "Movies"
     And I follow "Sequels"
     And "Ice Age 2" "link" should appear before "Shrek 2" "link"
-    And I click on "Add a new course" "button"
+    And I click on "More" "button"
+    And I click on "Add a new course" "link"
     And I set the following fields to these values:
       | Course full name  | Minions |
       | Course short name | minions |
-    And I click on "Save and return" "button"
+    And I click on "Save and display" "button"
+    And I am on course index
+    And I follow "Movies"
+    And I follow "Sequels"
     Then "Ice Age 2" "link" should appear before "Shrek 2" "link"
     And "Minions" "link" should appear before "Ice Age 2" "link"
 
