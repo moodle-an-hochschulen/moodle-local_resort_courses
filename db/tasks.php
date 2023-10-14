@@ -24,8 +24,8 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$tasks = array(
-        array(
+$tasks = [
+        [
                 'classname' => 'local_resort_courses\task\resort_courses',
                 'blocking' => 0,
                 'minute' => '0',
@@ -33,6 +33,6 @@ $tasks = array(
                 'day' => '*',
                 'month' => '*',
                 'dayofweek' => '0',
-                'disabled' => 1
-        )
-);
+                'disabled' => 1,
+        ],
+];

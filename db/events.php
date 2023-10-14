@@ -24,15 +24,15 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$observers = array(
-    array(
+$observers = [
+    [
         'eventname' => '\core\event\course_created',
         'includefile' => '/local/resort_courses/locallib.php',
         'callback' => 'resort_course_eventhandler',
-    ),
-    array(
+    ],
+    [
         'eventname' => '\core\event\course_updated',
         'includefile' => '/local/resort_courses/locallib.php',
         'callback' => 'resort_course_eventhandler',
-    ),
-);
+    ],
+];

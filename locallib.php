@@ -57,7 +57,7 @@ function resort_course_eventhandler($eventdata) {
     }
 
     // Get category.
-    $category = $DB->get_record('course_categories', array('id' => $eventcourse->category));
+    $category = $DB->get_record('course_categories', ['id' => $eventcourse->category]);
     if (!$category) {
         // Now we have an error, but if we return false, the event will stay in the event queue.
         // Let's return and leave the category unsorted.
@@ -178,7 +178,7 @@ function resort_course_category($category, $cronrunning = false) {
         // Do the resorting.
         $i = 1;
         foreach ($courses as $course) {
-            $DB->set_field('course', 'sortorder', $category->sortorder + $i, array('id' => $course->id));
+            $DB->set_field('course', 'sortorder', $category->sortorder + $i, ['id' => $course->id]);
             $i++;
         }
 
@@ -187,13 +187,13 @@ function resort_course_category($category, $cronrunning = false) {
         cache_helper::purge_by_event('changesincourse');
 
         // Log the event.
-        $logevent = \local_resort_courses\event\courses_sorted::create(array(
+        $logevent = \local_resort_courses\event\courses_sorted::create([
             'objectid' => $category->id,
             'context' => context_coursecat::instance($category->id),
-            'other' => array(
+            'other' => [
                 'cronrunning' => $cronrunning,
-            )
-        ));
+            ],
+        ]);
         $logevent->trigger();
     }
 
