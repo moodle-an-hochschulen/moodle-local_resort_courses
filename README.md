@@ -60,6 +60,17 @@ Capabilities
 This plugin does not add any additional capabilities.
 
 
+Scheduled Tasks
+---------------
+
+This plugin also introduces these additional scheduled tasks:
+
+### \local_resort_courses\task\resort_courses
+
+This task re-sorts all courses in all categories (see below for details).\
+By default, the task is disabled.
+
+
 How this plugin works
 ---------------------
 
