@@ -67,9 +67,9 @@ class courses_sorted extends \core\event\base {
     /**
      * Get url related to the action.
      *
-     * @return \moodle_url
+     * @return \core\url
      */
     public function get_url() {
-        return new \moodle_url('/course/index.php', ['categoryid' => $this->objectid]);
+        return new \core\url('/course/index.php', ['categoryid' => $this->objectid]);
     }
 }
