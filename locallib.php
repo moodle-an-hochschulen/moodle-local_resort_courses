@@ -184,7 +184,7 @@ function resort_course_category($category, $cronrunning = false) {
 
         // Cleanup - This should not be needed but we do it just to be safe.
         fix_course_sortorder();
-        cache_helper::purge_by_event('changesincourse');
+        \core_cache\helper::purge_by_event('changesincourse');
 
         // Log the event.
         $logevent = \local_resort_courses\event\courses_sorted::create([
