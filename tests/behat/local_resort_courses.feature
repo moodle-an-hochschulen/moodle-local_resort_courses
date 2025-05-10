@@ -28,8 +28,8 @@ Feature: Using the local_resort_courses plugin
     And I am on course index
     And I follow "Series"
     And "House M.D." "link" should appear before "The X Files" "link"
-    And I click on "More" "button"
-    And I click on "Add a new course" "link"
+    And I open the action menu in "region-main" "region"
+    And I choose "Add a new course" in the open action menu
     And I set the following fields to these values:
       | Course full name  | Lucifer |
       | Course short name | lucifer |
@@ -48,8 +48,8 @@ Feature: Using the local_resort_courses plugin
     And I am on course index
     And I follow "Series"
     And "House M.D." "link" should appear before "The X Files" "link"
-    And I click on "More" "button"
-    And I click on "Add a new course" "link"
+    And I open the action menu in "region-main" "region"
+    And I choose "Add a new course" in the open action menu
     And I set the following fields to these values:
       | Course full name  | Lucifer |
       | Course short name | lucifer |
@@ -68,8 +68,8 @@ Feature: Using the local_resort_courses plugin
     And I am on course index
     And I follow "Series"
     And "House M.D." "link" should appear before "The X Files" "link"
-    And I click on "More" "button"
-    And I click on "Add a new course" "link"
+    And I open the action menu in "region-main" "region"
+    And I choose "Add a new course" in the open action menu
     And I set the following fields to these values:
       | Course full name  | Lucifer |
       | Course short name | lucifer |
@@ -88,8 +88,8 @@ Feature: Using the local_resort_courses plugin
     And I am on course index
     And I follow "Series"
     And "House M.D." "link" should appear before "The X Files" "link"
-    And I click on "More" "button"
-    And I click on "Add a new course" "link"
+    And I open the action menu in "region-main" "region"
+    And I choose "Add a new course" in the open action menu
     And I set the following fields to these values:
       | Course full name  | Lucifer |
       | Course short name | lucifer |
@@ -108,8 +108,8 @@ Feature: Using the local_resort_courses plugin
     And I am on course index
     And I follow "Series"
     And "House M.D." "link" should appear before "The X Files" "link"
-    And I click on "More" "button"
-    And I click on "Add a new course" "link"
+    And I open the action menu in "region-main" "region"
+    And I choose "Add a new course" in the open action menu
     And I set the following fields to these values:
       | Course full name  | Lucifer |
       | Course short name | lucifer |
@@ -129,8 +129,8 @@ Feature: Using the local_resort_courses plugin
     And I am on course index
     And I follow "Series"
     And "House M.D." "link" should appear before "The X Files" "link"
-    And I click on "More" "button"
-    And I click on "Add a new course" "link"
+    And I open the action menu in "region-main" "region"
+    And I choose "Add a new course" in the open action menu
     And I set the following fields to these values:
       | Course full name  | Lucifer |
       | Course short name | lucifer |
@@ -150,8 +150,8 @@ Feature: Using the local_resort_courses plugin
     And I am on course index
     And I follow "Series"
     And "House M.D." "link" should appear before "The X Files" "link"
-    And I click on "More" "button"
-    And I click on "Add a new course" "link"
+    And I open the action menu in "region-main" "region"
+    And I choose "Add a new course" in the open action menu
     And I set the following fields to these values:
       | Course full name  | Lucifer |
       | Course short name | lucifer |
@@ -171,8 +171,8 @@ Feature: Using the local_resort_courses plugin
     And I am on course index
     And I follow "Series"
     And "House M.D." "link" should appear before "The X Files" "link"
-    And I click on "More" "button"
-    And I click on "Add a new course" "link"
+    And I open the action menu in "region-main" "region"
+    And I choose "Add a new course" in the open action menu
     And I set the following fields to these values:
       | Course full name  | Lucifer |
       | Course short name | lucifer |
@@ -198,8 +198,8 @@ Feature: Using the local_resort_courses plugin
     And I am on course index
     And I follow "Movies"
     And "Avatar" "link" should appear before "Ice Age" "link"
-    And I click on "More" "button"
-    And I click on "Add a new course" "link"
+    And I open the action menu in "region-main" "region"
+    And I choose "Add a new course" in the open action menu
     And I set the following fields to these values:
       | Course full name  | E.T. |
       | Course short name | et   |
@@ -224,8 +224,8 @@ Feature: Using the local_resort_courses plugin
     And I am on course index
     And I follow "Series"
     And "House M.D." "link" should appear before "The X Files" "link"
-    And I click on "More" "button"
-    And I click on "Add a new course" "link"
+    And I open the action menu in "region-main" "region"
+    And I choose "Add a new course" in the open action menu
     And I set the following fields to these values:
       | Course full name  | Lucifer |
       | Course short name | lucifer |
@@ -252,8 +252,8 @@ Feature: Using the local_resort_courses plugin
     And I follow "Movies"
     And I follow "Sequels"
     And "Ice Age 2" "link" should appear before "Shrek 2" "link"
-    And I click on "More" "button"
-    And I click on "Add a new course" "link"
+    And I open the action menu in "region-main" "region"
+    And I choose "Add a new course" in the open action menu
     And I set the following fields to these values:
       | Course full name  | Minions |
       | Course short name | minions |
