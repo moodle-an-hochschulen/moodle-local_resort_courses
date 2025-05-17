@@ -4,7 +4,7 @@ moodle-local_resort_courses
 Changes
 -------
 
-### Unreleased
+### v5.0-r1
 
 * 2025-04-14 - Upgrade: Fix Behat tests which broke on Moodle 5.0
 * 2025-04-14 - Prepare compatibility for Moodle 5.0.
