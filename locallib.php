@@ -84,8 +84,8 @@ function resort_courses_cron() {
     // Iterate over all categories.
     foreach ($allcategories as $category) {
         // Cron log output.
-        mtrace('[local_resort_courses] ... Re-sorting category '.$category->id.
-                ' (Path: '.$category->path.' | Name: '.$category->name.')');
+        mtrace('[local_resort_courses] ... Re-sorting category ' . $category->id .
+                ' (Path: ' . $category->path . ' | Name: ' . $category->name . ')');
 
         // Sort the category.
         resort_course_category($category, true);
@@ -135,7 +135,7 @@ function resort_course_category($category, $cronrunning = false) {
     }
 
     // Set sortorder sql clause.
-    switch($config->sortorder) {
+    switch ($config->sortorder) {
         case RESORT_COURSES_SORT_FULLNAME_ASC:
             $sortsql = "lower(c.fullname) ASC";
             break;
