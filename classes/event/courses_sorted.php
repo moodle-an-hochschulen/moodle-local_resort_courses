@@ -32,7 +32,6 @@ namespace local_resort_courses\event;
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class courses_sorted extends \core\event\base {
-
     /**
      * Init method.
      */

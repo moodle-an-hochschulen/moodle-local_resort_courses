@@ -32,7 +32,6 @@ namespace local_resort_courses\task;
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class resort_courses extends \core\task\scheduled_task {
-
     /**
      * Return localised task name.
      *
@@ -49,7 +48,7 @@ class resort_courses extends \core\task\scheduled_task {
      */
     public function execute() {
         global $CFG;
-        require_once($CFG->dirroot.'/local/resort_courses/locallib.php');
+        require_once($CFG->dirroot . '/local/resort_courses/locallib.php');
         resort_courses_cron();
 
         // Return true in any case as this plugin does not really have any error handling if a category could not be sorted.
