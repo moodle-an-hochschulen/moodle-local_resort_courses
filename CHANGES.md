@@ -6,6 +6,8 @@ Changes
 
 ### Unreleased
 
+* 2026-10-31 - Bugfix: The courses sorted event declared the course table as its object table even though its object id is a course category id. The event now declares the course categories table instead.
+               Please note: Log entries of this event which were stored before this fix still declare the course table as their object table. These existing log entries are not changed.
 * 2026-10-31 - Improvement: Run the site-wide course sort order cleanup and cache purge only once per scheduled task run instead of once per category.
 * 2026-10-31 - Bugfix: Avoid an undefined variable warning when skipping categories recursively is enabled without any categories being selected.
 
