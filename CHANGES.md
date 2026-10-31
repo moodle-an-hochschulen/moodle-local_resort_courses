@@ -6,6 +6,7 @@ Changes
 
 ### Unreleased
 
+* 2026-10-31 - Cleanup: Remove legacy event handler return values and an unreachable course check from the event observer.
 * 2026-10-31 - Improvement: Use the course id as tiebreaker when sorting courses with equal sort values (for example, courses without a course ID number or with the same start date) to get a deterministic order.
 * 2026-10-31 - Bugfix: Re-sort all courses within a category, regardless of the visibility of these courses to the user who triggered the re-sorting. Before, hidden courses were left out when the re-sorting was triggered by a user who was not allowed to see them, for example, by a teacher who updated their course.
 * 2026-10-31 - Bugfix: The courses sorted event declared the course table as its object table even though its object id is a course category id. The event now declares the course categories table instead.
