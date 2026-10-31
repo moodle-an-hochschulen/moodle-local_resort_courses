@@ -286,6 +286,39 @@ Feature: Using the local_resort_courses plugin
     Then "House M.D." "link" should appear before "Lucifer" "link"
     And "Lucifer" "link" should appear before "The X Files" "link"
 
+  @javascript
+  Scenario: Sort courses by full name ascending order including hidden courses when a teacher updates a course
+    Given the following config values are set as admin:
+      | config    | value | plugin               |
+      | sortorder | 1     | local_resort_courses |
+    And the following "courses" exist:
+      | fullname | shortname | category  | visible |
+      | Lost     | lost      | catseries | 0       |
+    And the following "users" exist:
+      | username | firstname | lastname | email                |
+      | teacher1 | Teacher   | 1        | teacher1@example.com |
+    And the following "course enrolments" exist:
+      | user     | course | role           |
+      | teacher1 | house  | editingteacher |
+    When I log in as "admin"
+    And I am on course index
+    And I follow "Series"
+    And "House M.D." "link" should appear before "Lost" "link"
+    And "Lost" "link" should appear before "The X Files" "link"
+    And I log out
+    And I log in as "teacher1"
+    And I am on "House M.D." course homepage
+    And I navigate to "Settings" in current page administration
+    And I set the following fields to these values:
+      | Course full name | Zorro |
+    And I click on "Save and display" "button"
+    And I log out
+    And I log in as "admin"
+    And I am on course index
+    And I follow "Series"
+    Then "Lost" "link" should appear before "The X Files" "link"
+    And "The X Files" "link" should appear before "Zorro" "link"
+
   Scenario: Sort all course categories with the scheduled task
     Given the following "categories" exist:
       | name       | category | idnumber |
