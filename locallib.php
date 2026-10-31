@@ -152,32 +152,35 @@ function resort_course_category($category, $cronrunning = false, $cleanup = true
     // Set sortorder sql clause.
     switch ($config->sortorder) {
         case RESORT_COURSES_SORT_FULLNAME_ASC:
-            $sortsql = "lower(c.fullname) ASC";
+            $sortsql = "lower(fullname) ASC";
             break;
         case RESORT_COURSES_SORT_FULLNAME_DESC:
-            $sortsql = "lower(c.fullname) DESC";
+            $sortsql = "lower(fullname) DESC";
             break;
         case RESORT_COURSES_SORT_SHORTNAME_ASC:
-            $sortsql = "lower(c.shortname) ASC";
+            $sortsql = "lower(shortname) ASC";
             break;
         case RESORT_COURSES_SORT_SHORTNAME_DESC:
-            $sortsql = "lower(c.shortname) DESC";
+            $sortsql = "lower(shortname) DESC";
             break;
         case RESORT_COURSES_SORT_COURSEID_ASC:
-            $sortsql = "c.idnumber ASC";
+            $sortsql = "idnumber ASC";
             break;
         case RESORT_COURSES_SORT_COURSEID_DESC:
-            $sortsql = "c.idnumber DESC";
+            $sortsql = "idnumber DESC";
             break;
         case RESORT_COURSES_SORT_STARTDATE_ASC:
-            $sortsql = "c.startdate ASC";
+            $sortsql = "startdate ASC";
             break;
         case RESORT_COURSES_SORT_STARTDATE_DESC:
-            $sortsql = "c.startdate DESC";
+            $sortsql = "startdate DESC";
             break;
         default:
-            $sortsql = "lower(c.fullname) ASC";
+            $sortsql = "lower(fullname) ASC";
     }
+
+    // Add the course id as tiebreaker to get a deterministic order for courses with equal sort values.
+    $sortsql .= ", id ASC";
 
     // Re-sort course category.
     // This is a subset of the function core_course_category::resort_courses().
@@ -186,7 +189,10 @@ function resort_course_category($category, $cronrunning = false, $cleanup = true
     // b) it does some additional formatting of the course names before sorting which we don't necessarily expect and need.
 
     // Get courses within category.
-    $courses = get_courses($category->id, $sortsql, 'c.id, c.fullname, c.sortorder, c.visible');
+    // We query the course table directly instead of using get_courses() as get_courses() only returns the courses which
+    // are visible to the current user. The re-sorting is meant to cover all courses within the category, regardless
+    // of the user who triggered it (for example, a teacher who updates their course and who cannot see other hidden courses).
+    $courses = $DB->get_records('course', ['category' => $category->id], $sortsql, 'id');
 
     // If there are any courses in the category.
     if (count($courses) > 0) {
