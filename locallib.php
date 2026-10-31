@@ -78,17 +78,31 @@ function resort_courses_cron() {
     // Get all course categories.
     $allcategories = core_course_category::get_all();
 
+    // Get plugin config once for all categories.
+    $config = get_config('local_resort_courses');
+
     // Start cron log output.
     mtrace('[local_resort_courses] Starting re-sorting of all categories');
 
-    // Iterate over all categories.
-    foreach ($allcategories as $category) {
-        // Cron log output.
-        mtrace('[local_resort_courses] ... Re-sorting category ' . $category->id .
-                ' (Path: ' . $category->path . ' | Name: ' . $category->name . ')');
+    try {
+        // Iterate over all categories.
+        foreach ($allcategories as $category) {
+            // Cron log output.
+            mtrace('[local_resort_courses] ... Re-sorting category ' . $category->id .
+                    ' (Path: ' . $category->path . ' | Name: ' . $category->name . ')');
 
-        // Sort the category.
-        resort_course_category($category, true);
+            // Sort the category, but skip the site-wide cleanup as we do it only once after the loop.
+            resort_course_category($category, true, false, $config);
+        }
+    } finally {
+        // Cron log output.
+        mtrace('[local_resort_courses] ... Cleaning up course sort order and caches');
+
+        // Cleanup - This should not be needed but we do it just to be safe.
+        // This is done in a finally block to make sure that already re-sorted categories are cleaned up
+        // even if an exception is thrown while re-sorting a category.
+        fix_course_sortorder();
+        \core_cache\helper::purge_by_event('changesincourse');
     }
 
     // End cron log output.
@@ -100,13 +114,18 @@ function resort_courses_cron() {
  *
  * @param object $category The category to be sorted.
  * @param bool $cronrunning The fact that the re-sorting was triggered by the scheduled task.
+ * @param bool $cleanup Whether to run the site-wide course sort order and cache cleanup after re-sorting.
+ *                      Callers which re-sort multiple categories should pass false and do the cleanup once afterwards.
+ * @param object|null $config The plugin config. If null, it is fetched within this function.
  * @return bool
  */
-function resort_course_category($category, $cronrunning = false) {
+function resort_course_category($category, $cronrunning = false, $cleanup = true, $config = null) {
     global $DB;
 
-    // Get plugin config.
-    $config = get_config('local_resort_courses');
+    // Get plugin config if it was not passed by the caller.
+    if ($config === null) {
+        $config = get_config('local_resort_courses');
+    }
 
     // Get the categories to be skipped according to plugin settings, defaulting to an empty list.
     $skipcategories = !empty($config->skipcategories) ? explode(',', $config->skipcategories) : [];
@@ -179,8 +198,10 @@ function resort_course_category($category, $cronrunning = false) {
         }
 
         // Cleanup - This should not be needed but we do it just to be safe.
-        fix_course_sortorder();
-        \core_cache\helper::purge_by_event('changesincourse');
+        if ($cleanup) {
+            fix_course_sortorder();
+            \core_cache\helper::purge_by_event('changesincourse');
+        }
 
         // Log the event.
         $logevent = \local_resort_courses\event\courses_sorted::create([

@@ -6,6 +6,7 @@ Changes
 
 ### Unreleased
 
+* 2026-10-31 - Improvement: Run the site-wide course sort order cleanup and cache purge only once per scheduled task run instead of once per category.
 * 2026-10-31 - Bugfix: Avoid an undefined variable warning when skipping categories recursively is enabled without any categories being selected.
 
 ### v4.5-r2
