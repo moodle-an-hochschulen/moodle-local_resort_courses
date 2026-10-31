@@ -33,42 +33,33 @@ define('RESORT_COURSES_SORT_STARTDATE_DESC', 8);
 
 
 /**
- * Event handler function which is called after an event was caught and which triggers the sorting of the course's category.
+ * Event observer function which is called after an event was caught and which triggers the sorting of the course's category.
  *
- * @param object $eventdata Event data
- * @return bool
+ * @param \core\event\base $event The event
+ * @return void
  */
-function resort_course_eventhandler($eventdata) {
+function resort_course_eventhandler($event) {
     global $DB;
 
     // Do not re-sort while testing Moodle core with PHPUnit.
     // This plugin does not use PHPUnit at the moment, but it does break some core PHPUnit tests when installed on a site.
     // Thus, skipping re-sorting is fine at the moment.
     if ((defined('PHPUNIT_TEST') && PHPUNIT_TEST)) {
-        return true;
+        return;
     }
 
     // Get course (because we need its category).
-    $eventcourse = get_course($eventdata->objectid);
-    if (!$eventcourse) {
-        // Now we have an error, but if we return false, the event will stay in the event queue.
-        // Let's return and leave the category unsorted.
-        return true;
-    }
+    $eventcourse = get_course($event->objectid);
 
     // Get category.
     $category = $DB->get_record('course_categories', ['id' => $eventcourse->category]);
     if (!$category) {
-        // Now we have an error, but if we return false, the event will stay in the event queue.
-        // Let's return and leave the category unsorted.
-        return true;
+        // If the category does not exist for whatever reason, let's return and leave it unsorted.
+        return;
     }
 
     // Sort category.
     resort_course_category($category, false);
-
-    // Always return true even if something went wrong as, if we would return false, the event would stay in the event queue.
-    return true;
 }
 
 /**
