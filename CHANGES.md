@@ -4,6 +4,10 @@ moodle-local_resort_courses
 Changes
 -------
 
+### Unreleased
+
+* 2026-10-31 - Bugfix: Avoid an undefined variable warning when skipping categories recursively is enabled without any categories being selected.
+
 ### v5.1-r1
 
 * 2025-10-26 - Prepare compatibility for Moodle 5.1.
