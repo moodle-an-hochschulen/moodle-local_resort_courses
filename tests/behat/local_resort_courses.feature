@@ -264,6 +264,28 @@ Feature: Using the local_resort_courses plugin
     Then "Ice Age 2" "link" should appear before "Shrek 2" "link"
     And "Minions" "link" should appear before "Ice Age 2" "link"
 
+  @javascript
+  Scenario: Sort courses by full name ascending order with skip categories recursively enabled but no categories selected
+    Given the following config values are set as admin:
+      | config                    | value | plugin               |
+      | sortorder                 | 1     | local_resort_courses |
+      | skipcategories            |       | local_resort_courses |
+      | skipcategoriesrecursively | 1     | local_resort_courses |
+    When I log in as "admin"
+    And I am on course index
+    And I follow "Series"
+    And "House M.D." "link" should appear before "The X Files" "link"
+    And I click on "More" "button"
+    And I click on "Add a new course" "link"
+    And I set the following fields to these values:
+      | Course full name  | Lucifer |
+      | Course short name | lucifer |
+    And I click on "Save and display" "button"
+    And I am on course index
+    And I follow "Series"
+    Then "House M.D." "link" should appear before "Lucifer" "link"
+    And "Lucifer" "link" should appear before "The X Files" "link"
+
   Scenario: Sort all course categories with the scheduled task
     Given the following "categories" exist:
       | name       | category | idnumber |
