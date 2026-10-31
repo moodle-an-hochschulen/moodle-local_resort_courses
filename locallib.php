@@ -108,28 +108,24 @@ function resort_course_category($category, $cronrunning = false) {
     // Get plugin config.
     $config = get_config('local_resort_courses');
 
+    // Get the categories to be skipped according to plugin settings, defaulting to an empty list.
+    $skipcategories = !empty($config->skipcategories) ? explode(',', $config->skipcategories) : [];
+
     // Check if category has to be skipped according to plugin settings.
-    if (!empty($config->skipcategories)) {
-        $skipcategories = explode(',', $config->skipcategories);
-        if (is_array($skipcategories)) {
-            if (in_array($category->id, $skipcategories)) {
-                // Category has to be skipped.
-                // Let's return and leave the category unsorted.
-                return true;
-            }
-        }
+    if (in_array($category->id, $skipcategories)) {
+        // Category has to be skipped.
+        // Let's return and leave the category unsorted.
+        return true;
     }
 
     // Check if we skip categories recursively and one of category's parents has to be skipped according to plugin settings.
-    if ($config->skipcategoriesrecursively == true) {
-        if (is_array($skipcategories)) {
-            $parents = explode("/", $category->path);
-            foreach ($parents as $p) {
-                if (in_array($p, $skipcategories)) {
-                    // Category has to be skipped.
-                    // Let's return and leave the category unsorted.
-                    return true;
-                }
+    if (!empty($config->skipcategoriesrecursively)) {
+        $parents = explode("/", $category->path);
+        foreach ($parents as $p) {
+            if ($p !== '' && in_array($p, $skipcategories)) {
+                // Category has to be skipped.
+                // Let's return and leave the category unsorted.
+                return true;
             }
         }
     }
