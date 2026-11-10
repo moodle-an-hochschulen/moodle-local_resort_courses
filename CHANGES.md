@@ -4,7 +4,7 @@ moodle-local_resort_courses
 Changes
 -------
 
-### Unreleased
+### v5.2-r2
 
 * 2026-10-31 - Cleanup: Remove legacy event handler return values and an unreachable course check from the event observer.
 * 2026-10-31 - Improvement: Use the course id as tiebreaker when sorting courses with equal sort values (for example, courses without a course ID number or with the same start date) to get a deterministic order.
