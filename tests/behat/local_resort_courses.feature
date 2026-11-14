@@ -319,6 +319,30 @@ Feature: Using the local_resort_courses plugin
     Then "Lost" "link" should appear before "The X Files" "link"
     And "The X Files" "link" should appear before "Zorro" "link"
 
+  Scenario Outline: Sort courses by full name naturally and without respecting HTML tags
+    Given the following "categories" exist:
+      | name    | category | idnumber   |
+      | Natural | 0        | catnatural |
+    And the following "courses" exist:
+      | fullname        | shortname | category   |
+      | Course 10       | course10  | catnatural |
+      | <b>Course</b> 2 | course2   | catnatural |
+      | course 1        | course1   | catnatural |
+    And the following config values are set as admin:
+      | config    | value       | plugin               |
+      | sortorder | <sortorder> | local_resort_courses |
+    When I run the scheduled task "local_resort_courses\task\resort_courses"
+    And I log in as "admin"
+    And I am on course index
+    And I follow "Natural"
+    Then "<first>" "link" should appear before "Course 2" "link"
+    And "Course 2" "link" should appear before "<last>" "link"
+
+    Examples:
+      | sortorder | first     | last      |
+      | 1         | course 1  | Course 10 |
+      | 2         | Course 10 | course 1  |
+
   Scenario: Sort all course categories with the scheduled task
     Given the following "categories" exist:
       | name       | category | idnumber |
