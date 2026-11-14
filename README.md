@@ -78,6 +78,9 @@ This plugin simply catches the course_created and course_updated events which ar
 
 Additionally, there is a scheduled task local_resort_courses\task\resort_courses which is disabled by default but which can be enabled to make sure that all categories are sorted properly in any case.
 
+When sorting by course full name or course short name, the plugin sorts naturally and locale-aware, just as Moodle core does. This means that numbers within course names are sorted by their value (for example, "Course 2" before "Course 10") and that HTML tags within course names are ignored.\
+However, unlike Moodle core, the plugin sorts by the raw course names and does not apply filters like the multilang filter before sorting. As the sort order is stored once for all users and as the re-sorting is triggered automatically, the result would otherwise depend on the language of the user who happened to trigger the re-sorting.
+
 
 Theme support
 -------------
