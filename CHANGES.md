@@ -6,6 +6,8 @@ Changes
 
 ### Unreleased
 
+* 2026-11-14 - Improvement: Only write the sort order of the courses whose sort order really changes when a category is re-sorted. If the order of the courses in a category does not change, the site-wide course sort order cleanup and cache purge are skipped as well.
+               Please note: The courses sorted event is now only logged if the order of the courses in the category was really changed, and not anymore on every creation / update of a course or for every category during a scheduled task run.
 * 2026-11-14 - Improvement: Sort courses by full name and short name naturally and locale-aware, just as Moodle core does when you sort a category on the course category management page. Numbers within course names are now sorted by their value (for example, "Course 2" before "Course 10"), umlauts and other special characters are sorted according to the locale and HTML tags within course names are ignored.
                Please note: This changes the resulting sort order on existing sites as soon as a category is re-sorted the next time. Unlike Moodle core, the plugin still sorts by the raw course names and does not apply filters like the multilang filter before sorting, as the result would depend on the language of the user who triggered the re-sorting.
 
