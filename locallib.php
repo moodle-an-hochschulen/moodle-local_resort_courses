@@ -192,7 +192,7 @@ function resort_course_category($category, $cronrunning = false, $cleanup = true
     // If the courses are sorted by a course name.
     if ($namefield !== null) {
         // Get the courses.
-        $courses = $DB->get_records('course', ['category' => $category->id], 'id ASC', 'id, ' . $namefield);
+        $courses = $DB->get_records('course', ['category' => $category->id], 'id ASC', 'id, sortorder, ' . $namefield);
 
         // Use the raw course names without any tags as sort values, just as Moodle core does,
         // but without formatting them before (see above).
@@ -224,18 +224,26 @@ function resort_course_category($category, $cronrunning = false, $cleanup = true
     } else {
         // Otherwise, get the courses in the configured order and use the course id as tiebreaker to get a deterministic order
         // for courses with equal sort values.
-        $courseids = array_keys($DB->get_records('course', ['category' => $category->id], $sortsql . ', id ASC', 'id'));
+        $courses = $DB->get_records('course', ['category' => $category->id], $sortsql . ', id ASC', 'id, sortorder');
+        $courseids = array_keys($courses);
     }
 
-    // If there are any courses in the category.
-    if (count($courseids) > 0) {
-        // Do the resorting.
-        $i = 1;
-        foreach ($courseids as $courseid) {
-            $DB->set_field('course', 'sortorder', $category->sortorder + $i, ['id' => $courseid]);
-            $i++;
+    // Do the resorting, but only write the sort order of the courses whose sort order really changes.
+    // This avoids unnecessary database writes, especially in large categories and during bulk operations.
+    $changed = false;
+    $i = 1;
+    foreach ($courseids as $courseid) {
+        $newsortorder = (int)$category->sortorder + $i;
+        if ((int)$courses[$courseid]->sortorder !== $newsortorder) {
+            $DB->set_field('course', 'sortorder', $newsortorder, ['id' => $courseid]);
+            $changed = true;
         }
+        $i++;
+    }
 
+    // If the order of the courses in the category was changed.
+    // Otherwise, there is nothing to clean up and nothing to log.
+    if ($changed) {
         // Cleanup - This should not be needed but we do it just to be safe.
         if ($cleanup) {
             fix_course_sortorder();
