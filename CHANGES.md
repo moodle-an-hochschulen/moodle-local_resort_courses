@@ -4,6 +4,11 @@ moodle-local_resort_courses
 Changes
 -------
 
+### Unreleased
+
+* 2026-11-14 - Improvement: Sort courses by full name and short name naturally and locale-aware, just as Moodle core does when you sort a category on the course category management page. Numbers within course names are now sorted by their value (for example, "Course 2" before "Course 10"), umlauts and other special characters are sorted according to the locale and HTML tags within course names are ignored.
+               Please note: This changes the resulting sort order on existing sites as soon as a category is re-sorted the next time. Unlike Moodle core, the plugin still sorts by the raw course names and does not apply filters like the multilang filter before sorting, as the result would depend on the language of the user who triggered the re-sorting.
+
 ### v5.2-r2
 
 * 2026-10-31 - Cleanup: Remove legacy event handler return values and an unreachable course check from the event observer.
