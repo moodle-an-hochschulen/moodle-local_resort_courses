@@ -319,6 +319,30 @@ Feature: Using the local_resort_courses plugin
     Then "Lost" "link" should appear before "The X Files" "link"
     And "The X Files" "link" should appear before "Zorro" "link"
 
+  Scenario Outline: Sort courses by full name naturally and without respecting HTML tags
+    Given the following "categories" exist:
+      | name    | category | idnumber   |
+      | Natural | 0        | catnatural |
+    And the following "courses" exist:
+      | fullname        | shortname | category   |
+      | Course 10       | course10  | catnatural |
+      | <b>Course</b> 2 | course2   | catnatural |
+      | course 1        | course1   | catnatural |
+    And the following config values are set as admin:
+      | config    | value       | plugin               |
+      | sortorder | <sortorder> | local_resort_courses |
+    When I run the scheduled task "local_resort_courses\task\resort_courses"
+    And I log in as "admin"
+    And I am on course index
+    And I follow "Natural"
+    Then "<first>" "link" should appear before "Course 2" "link"
+    And "Course 2" "link" should appear before "<last>" "link"
+
+    Examples:
+      | sortorder | first     | last      |
+      | 1         | course 1  | Course 10 |
+      | 2         | Course 10 | course 1  |
+
   Scenario: Sort all course categories with the scheduled task
     Given the following "categories" exist:
       | name       | category | idnumber |
@@ -357,3 +381,36 @@ Feature: Using the local_resort_courses plugin
     And I am on course index
     And I follow "Category B"
     And "DDD Course" "link" should appear before "BBB Course" "link"
+
+  Scenario: Log the re-sorting of a category only if the order of the courses was changed
+    Given the following config values are set as admin:
+      | config    | value | plugin               |
+      | sortorder | 1     | local_resort_courses |
+    And the following "users" exist:
+      | username | firstname | lastname | email                |
+      | teacher1 | Teacher   | 1        | teacher1@example.com |
+    And the following "course enrolments" exist:
+      | user     | course | role           |
+      | teacher1 | house  | editingteacher |
+    When I am on the "house" "course editing" page logged in as "teacher1"
+    And I set the following fields to these values:
+      | Course summary | A series about a doctor |
+    And I click on "Save and display" "button"
+    And I log out
+    And I log in as "admin"
+    And I navigate to "Reports > Logs" in site administration
+    And I set the field "Select a user" to "Teacher 1"
+    And I click on "Get these logs" "button"
+    Then I should see "Course updated"
+    And I should not see "Courses re-sorted"
+    And I log out
+    And I am on the "house" "course editing" page logged in as "teacher1"
+    And I set the following fields to these values:
+      | Course full name | Zorro |
+    And I click on "Save and display" "button"
+    And I log out
+    And I log in as "admin"
+    And I navigate to "Reports > Logs" in site administration
+    And I set the field "Select a user" to "Teacher 1"
+    And I click on "Get these logs" "button"
+    And I should see "Courses re-sorted"

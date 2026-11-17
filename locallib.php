@@ -140,19 +140,25 @@ function resort_course_category($category, $cronrunning = false, $cleanup = true
         }
     }
 
-    // Set sortorder sql clause.
+    // Set the sort criteria.
+    // Course names are sorted in PHP (see below), all other fields are sorted in SQL.
+    $namefield = null;
+    $namedesc = false;
+    $sortsql = null;
     switch ($config->sortorder) {
         case RESORT_COURSES_SORT_FULLNAME_ASC:
-            $sortsql = "lower(fullname) ASC";
+            $namefield = 'fullname';
             break;
         case RESORT_COURSES_SORT_FULLNAME_DESC:
-            $sortsql = "lower(fullname) DESC";
+            $namefield = 'fullname';
+            $namedesc = true;
             break;
         case RESORT_COURSES_SORT_SHORTNAME_ASC:
-            $sortsql = "lower(shortname) ASC";
+            $namefield = 'shortname';
             break;
         case RESORT_COURSES_SORT_SHORTNAME_DESC:
-            $sortsql = "lower(shortname) DESC";
+            $namefield = 'shortname';
+            $namedesc = true;
             break;
         case RESORT_COURSES_SORT_COURSEID_ASC:
             $sortsql = "idnumber ASC";
@@ -167,33 +173,77 @@ function resort_course_category($category, $cronrunning = false, $cleanup = true
             $sortsql = "startdate DESC";
             break;
         default:
-            $sortsql = "lower(fullname) ASC";
+            $namefield = 'fullname';
     }
-
-    // Add the course id as tiebreaker to get a deterministic order for courses with equal sort values.
-    $sortsql .= ", id ASC";
 
     // Re-sort course category.
     // This is a subset of the function core_course_category::resort_courses().
     // We don't directly use this function as
     // a) it was not there when this plugin was built and does not support sorting by startdate unfortunately.
-    // b) it does some additional formatting of the course names before sorting which we don't necessarily expect and need.
+    // b) it passes the course names through format_string() before sorting them. With multilang course names, the
+    // result depends on the language of the user who triggers the sorting. As this plugin re-sorts automatically,
+    // regardless of who triggered it, this would result in an unpredictable sort order.
 
     // Get courses within category.
     // We query the course table directly instead of using get_courses() as get_courses() only returns the courses which
     // are visible to the current user. The re-sorting is meant to cover all courses within the category, regardless
     // of the user who triggered it (for example, a teacher who updates their course and who cannot see other hidden courses).
-    $courses = $DB->get_records('course', ['category' => $category->id], $sortsql, 'id');
 
-    // If there are any courses in the category.
-    if (count($courses) > 0) {
-        // Do the resorting.
-        $i = 1;
+    // If the courses are sorted by a course name.
+    if ($namefield !== null) {
+        // Get the courses.
+        $courses = $DB->get_records('course', ['category' => $category->id], 'id ASC', 'id, sortorder, ' . $namefield);
+
+        // Use the raw course names without any tags as sort values, just as Moodle core does,
+        // but without formatting them before (see above).
         foreach ($courses as $course) {
-            $DB->set_field('course', 'sortorder', $category->sortorder + $i, ['id' => $course->id]);
-            $i++;
+            $course->sortby = strip_tags($course->$namefield);
         }
 
+        // Sort the courses naturally and locale-aware, just as Moodle core does.
+        core_collator::asort_objects_by_property($courses, 'sortby', core_collator::SORT_NATURAL);
+
+        // Group the courses by their sort values, keeping the order of the sort values.
+        $groups = [];
+        foreach ($courses as $course) {
+            $groups[$course->sortby][] = $course->id;
+        }
+
+        // Reverse the order of the sort values if a descending order is configured.
+        if ($namedesc) {
+            $groups = array_reverse($groups, true);
+        }
+
+        // Compose the list of course ids and use the course id as tiebreaker to get a deterministic order
+        // for courses with equal sort values.
+        $courseids = [];
+        foreach ($groups as $group) {
+            sort($group, SORT_NUMERIC);
+            $courseids = array_merge($courseids, $group);
+        }
+    } else {
+        // Otherwise, get the courses in the configured order and use the course id as tiebreaker to get a deterministic order
+        // for courses with equal sort values.
+        $courses = $DB->get_records('course', ['category' => $category->id], $sortsql . ', id ASC', 'id, sortorder');
+        $courseids = array_keys($courses);
+    }
+
+    // Do the resorting, but only write the sort order of the courses whose sort order really changes.
+    // This avoids unnecessary database writes, especially in large categories and during bulk operations.
+    $changed = false;
+    $i = 1;
+    foreach ($courseids as $courseid) {
+        $newsortorder = (int)$category->sortorder + $i;
+        if ((int)$courses[$courseid]->sortorder !== $newsortorder) {
+            $DB->set_field('course', 'sortorder', $newsortorder, ['id' => $courseid]);
+            $changed = true;
+        }
+        $i++;
+    }
+
+    // If the order of the courses in the category was changed.
+    // Otherwise, there is nothing to clean up and nothing to log.
+    if ($changed) {
         // Cleanup - This should not be needed but we do it just to be safe.
         if ($cleanup) {
             fix_course_sortorder();
