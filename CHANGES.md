@@ -4,7 +4,7 @@ moodle-local_resort_courses
 Changes
 -------
 
-### Unreleased
+### v5.0-r4
 
 * 2026-11-14 - Improvement: Only write the sort order of the courses whose sort order really changes when a category is re-sorted. If the order of the courses in a category does not change, the site-wide course sort order cleanup and cache purge are skipped as well.
                Please note: The courses sorted event is now only logged if the order of the courses in the category was really changed, and not anymore on every creation / update of a course or for every category during a scheduled task run.
